@@ -16,8 +16,8 @@ def callWebhook(eventName):
 
 # This funtion plays the audio message
 def thread_voice_alert(engine):
-    engine.say("hello Boss!")
-    engine.runAndWait()
+    #engine.say("Object Detected")
+    #engine.runAndWait()
     callWebhook("room")
 
 
@@ -51,13 +51,13 @@ while True:
         else:
             status=1
             (x, y, w, h)=cv2.boundingRect(contour)
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 1)
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0,0,255), 1)
     status_list.append(status)
     #print(status_list)
 	
 	
     if status_list[-1]==1 and status_list[-2]==0:
-        t = threading.Thread(target=thread_voice_alert, args=(engine,))
+        t = threading.Thread(target=callWebhook, args=("room",))
         t.start()
 
 
